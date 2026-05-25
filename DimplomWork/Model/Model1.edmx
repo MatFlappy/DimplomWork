@@ -17,6 +17,7 @@
           <Property Name="tone_id" Type="int" />
           <Property Name="description" Type="text" />
           <Property Name="stock_quantity" Type="int" />
+          <Property Name="supplier_id" Type="int" />
         </EntityType>
         <EntityType Name="Order_Items">
           <Key>
@@ -57,6 +58,18 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Suppliers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="contact_person" Type="varchar" MaxLength="100" />
+          <Property Name="address" Type="varchar" MaxLength="200" />
+          <Property Name="inn" Type="varchar" MaxLength="12" />
+        </EntityType>
         <EntityType Name="Tiles">
           <Key>
             <PropertyRef Name="id" />
@@ -70,6 +83,7 @@
           <Property Name="slab_size" Type="varchar" MaxLength="50" />
           <Property Name="thickness_mm" Type="int" />
           <Property Name="stock_quantity" Type="int" />
+          <Property Name="supplier_id" Type="int" />
         </EntityType>
         <EntityType Name="Tones">
           <Key>
@@ -99,6 +113,18 @@
             </Principal>
             <Dependent Role="Complete_Products">
               <PropertyRef Name="stone_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Complete___suppl__6D0D32F4">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="Complete_Products" Type="Self.Complete_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Complete_Products">
+              <PropertyRef Name="supplier_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -176,6 +202,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Tiles__supplier___6E01572D">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="Tiles" Type="Self.Tiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tiles">
+              <PropertyRef Name="supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Tiles__tone_id__68487DD7">
           <End Role="Tones" Type="Self.Tones" Multiplicity="0..1" />
           <End Role="Tiles" Type="Self.Tiles" Multiplicity="*" />
@@ -206,11 +244,16 @@
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stone_Types" EntityType="Self.Stone_Types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tiles" EntityType="Self.Tiles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tones" EntityType="Self.Tones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Complete___stone__619B8048" Association="Self.FK__Complete___stone__619B8048">
             <End Role="Stone_Types" EntitySet="Stone_Types" />
+            <End Role="Complete_Products" EntitySet="Complete_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Complete___suppl__6D0D32F4" Association="Self.FK__Complete___suppl__6D0D32F4">
+            <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="Complete_Products" EntitySet="Complete_Products" />
           </AssociationSet>
           <AssociationSet Name="FK__Complete___tone___628FA481" Association="Self.FK__Complete___tone___628FA481">
@@ -235,6 +278,10 @@
           </AssociationSet>
           <AssociationSet Name="FK__Tiles__stone_typ__6754599E" Association="Self.FK__Tiles__stone_typ__6754599E">
             <End Role="Stone_Types" EntitySet="Stone_Types" />
+            <End Role="Tiles" EntitySet="Tiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tiles__supplier___6E01572D" Association="Self.FK__Tiles__supplier___6E01572D">
+            <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="Tiles" EntitySet="Tiles" />
           </AssociationSet>
           <AssociationSet Name="FK__Tiles__tone_id__68487DD7" Association="Self.FK__Tiles__tone_id__68487DD7">
@@ -263,7 +310,9 @@
           <Property Name="tone_id" Type="Int32" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="stock_quantity" Type="Int32" />
+          <Property Name="supplier_id" Type="Int32" />
           <NavigationProperty Name="Stone_Types" Relationship="Self.FK__Complete___stone__619B8048" FromRole="Complete_Products" ToRole="Stone_Types" />
+          <NavigationProperty Name="Suppliers" Relationship="Self.FK__Complete___suppl__6D0D32F4" FromRole="Complete_Products" ToRole="Suppliers" />
           <NavigationProperty Name="Tones" Relationship="Self.FK__Complete___tone___628FA481" FromRole="Complete_Products" ToRole="Tones" />
           <NavigationProperty Name="Order_Items" Relationship="Self.FK__Order_Ite__compl__6383C8BA" FromRole="Complete_Products" ToRole="Order_Items" />
         </EntityType>
@@ -314,6 +363,20 @@
           <NavigationProperty Name="Complete_Products" Relationship="Self.FK__Complete___stone__619B8048" FromRole="Stone_Types" ToRole="Complete_Products" />
           <NavigationProperty Name="Tiles" Relationship="Self.FK__Tiles__stone_typ__6754599E" FromRole="Stone_Types" ToRole="Tiles" />
         </EntityType>
+        <EntityType Name="Suppliers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contact_person" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="inn" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Complete_Products" Relationship="Self.FK__Complete___suppl__6D0D32F4" FromRole="Suppliers" ToRole="Complete_Products" />
+          <NavigationProperty Name="Tiles" Relationship="Self.FK__Tiles__supplier___6E01572D" FromRole="Suppliers" ToRole="Tiles" />
+        </EntityType>
         <EntityType Name="Tiles">
           <Key>
             <PropertyRef Name="id" />
@@ -327,8 +390,10 @@
           <Property Name="slab_size" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="thickness_mm" Type="Int32" />
           <Property Name="stock_quantity" Type="Int32" />
+          <Property Name="supplier_id" Type="Int32" />
           <NavigationProperty Name="Order_Items" Relationship="Self.FK__Order_Ite__tile___656C112C" FromRole="Tiles" ToRole="Order_Items" />
           <NavigationProperty Name="Stone_Types" Relationship="Self.FK__Tiles__stone_typ__6754599E" FromRole="Tiles" ToRole="Stone_Types" />
+          <NavigationProperty Name="Suppliers" Relationship="Self.FK__Tiles__supplier___6E01572D" FromRole="Tiles" ToRole="Suppliers" />
           <NavigationProperty Name="Tones" Relationship="Self.FK__Tiles__tone_id__68487DD7" FromRole="Tiles" ToRole="Tones" />
         </EntityType>
         <EntityType Name="Tones">
@@ -363,6 +428,18 @@
             </Principal>
             <Dependent Role="Complete_Products">
               <PropertyRef Name="stone_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Complete___suppl__6D0D32F4">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="Complete_Products" Type="Self.Complete_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Complete_Products">
+              <PropertyRef Name="supplier_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -452,6 +529,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Tiles__supplier___6E01572D">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="Tiles" Type="Self.Tiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tiles">
+              <PropertyRef Name="supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Tiles__tone_id__68487DD7">
           <End Role="Tones" Type="Self.Tones" Multiplicity="0..1" />
           <End Role="Tiles" Type="Self.Tiles" Multiplicity="*" />
@@ -470,11 +559,16 @@
           <EntitySet Name="Orders" EntityType="Self.Orders" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="Stone_Types" EntityType="Self.Stone_Types" />
+          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" />
           <EntitySet Name="Tiles" EntityType="Self.Tiles" />
           <EntitySet Name="Tones" EntityType="Self.Tones" />
           <EntitySet Name="Users" EntityType="Self.Users" />
           <AssociationSet Name="FK__Complete___stone__619B8048" Association="Self.FK__Complete___stone__619B8048">
             <End Role="Stone_Types" EntitySet="Stone_Types" />
+            <End Role="Complete_Products" EntitySet="Complete_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Complete___suppl__6D0D32F4" Association="Self.FK__Complete___suppl__6D0D32F4">
+            <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="Complete_Products" EntitySet="Complete_Products" />
           </AssociationSet>
           <AssociationSet Name="FK__Complete___tone___628FA481" Association="Self.FK__Complete___tone___628FA481">
@@ -505,6 +599,10 @@
             <End Role="Stone_Types" EntitySet="Stone_Types" />
             <End Role="Tiles" EntitySet="Tiles" />
           </AssociationSet>
+          <AssociationSet Name="FK__Tiles__supplier___6E01572D" Association="Self.FK__Tiles__supplier___6E01572D">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Tiles" EntitySet="Tiles" />
+          </AssociationSet>
           <AssociationSet Name="FK__Tiles__tone_id__68487DD7" Association="Self.FK__Tiles__tone_id__68487DD7">
             <End Role="Tones" EntitySet="Tones" />
             <End Role="Tiles" EntitySet="Tiles" />
@@ -527,6 +625,7 @@
                 <ScalarProperty Name="tone_id" ColumnName="tone_id" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="stock_quantity" ColumnName="stock_quantity" />
+                <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -573,6 +672,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="Stone_ShopModel.Suppliers">
+              <MappingFragment StoreEntitySet="Suppliers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="contact_person" ColumnName="contact_person" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="inn" ColumnName="inn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Tiles">
             <EntityTypeMapping TypeName="Stone_ShopModel.Tiles">
               <MappingFragment StoreEntitySet="Tiles">
@@ -585,6 +697,7 @@
                 <ScalarProperty Name="slab_size" ColumnName="slab_size" />
                 <ScalarProperty Name="thickness_mm" ColumnName="thickness_mm" />
                 <ScalarProperty Name="stock_quantity" ColumnName="stock_quantity" />
+                <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

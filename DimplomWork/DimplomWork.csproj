@@ -92,6 +92,9 @@
     <Compile Include="Model\Stone_Types.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Suppliers.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Tiles.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

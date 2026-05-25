@@ -30,6 +30,7 @@ namespace DimplomWork.Model
         public DbSet<Orders> Orders { get; set; }
         public DbSet<Roles> Roles { get; set; }
         public DbSet<Stone_Types> Stone_Types { get; set; }
+        public DbSet<Suppliers> Suppliers { get; set; }
         public DbSet<Tiles> Tiles { get; set; }
         public DbSet<Tones> Tones { get; set; }
         public DbSet<Users> Users { get; set; }

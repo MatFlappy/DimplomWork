@@ -4,16 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="69fe65ec01b0489ba25e17c7638271f8" Name="Diagram1">
-        <EntityTypeShape EntityType="Stone_ShopModel.Complete_Products" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Stone_ShopModel.Order_Items" Width="1.5" PointX="8.25" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Stone_ShopModel.Orders" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Stone_ShopModel.Roles" Width="1.5" PointX="1.5" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="Stone_ShopModel.Stone_Types" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Stone_ShopModel.Tiles" Width="1.5" PointX="6" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Stone_ShopModel.Tones" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Stone_ShopModel.Users" Width="1.5" PointX="3.75" PointY="7.375" IsExpanded="true" />
+      <Diagram DiagramId="919e68e637a64d5a9969d3e290982adc" Name="Diagram1">
+        <EntityTypeShape EntityType="Stone_ShopModel.Complete_Products" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Stone_ShopModel.Order_Items" Width="1.5" PointX="8.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Stone_ShopModel.Orders" Width="1.5" PointX="6" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Stone_ShopModel.Roles" Width="1.5" PointX="1.5" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Stone_ShopModel.Stone_Types" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Stone_ShopModel.Suppliers" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Stone_ShopModel.Tiles" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Stone_ShopModel.Tones" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Stone_ShopModel.Users" Width="1.5" PointX="3.75" PointY="11" IsExpanded="true" />
         <AssociationConnector Association="Stone_ShopModel.FK__Complete___stone__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="Stone_ShopModel.FK__Complete___suppl__6D0D32F4" ManuallyRouted="false" />
         <AssociationConnector Association="Stone_ShopModel.FK__Complete___tone___628FA481" ManuallyRouted="false" />
         <AssociationConnector Association="Stone_ShopModel.FK__Order_Ite__compl__6383C8BA" ManuallyRouted="false" />
         <AssociationConnector Association="Stone_ShopModel.FK__Order_Ite__order__6477ECF3" ManuallyRouted="false" />
@@ -21,6 +23,7 @@
         <AssociationConnector Association="Stone_ShopModel.FK__Orders__user_id__66603565" ManuallyRouted="false" />
         <AssociationConnector Association="Stone_ShopModel.FK__Users__role_id__693CA210" ManuallyRouted="false" />
         <AssociationConnector Association="Stone_ShopModel.FK__Tiles__stone_typ__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="Stone_ShopModel.FK__Tiles__supplier___6E01572D" ManuallyRouted="false" />
         <AssociationConnector Association="Stone_ShopModel.FK__Tiles__tone_id__68487DD7" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

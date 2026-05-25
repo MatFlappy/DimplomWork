@@ -20,8 +20,8 @@
                  Margin="10"
                  Padding="10,5"
                  Tag="Поиск по названию, телефону или email"
-                 />
-        <!--TextChanged="SearchTb_TextChanged"-->
+                 TextChanged="SearchTb_TextChanged"/>
+        
 
         <!-- ListView с поставщиками -->
         <ListView x:Name="SuppliersLv" 

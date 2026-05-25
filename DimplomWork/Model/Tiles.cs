@@ -28,9 +28,11 @@ namespace DimplomWork.Model
         public string slab_size { get; set; }
         public Nullable<int> thickness_mm { get; set; }
         public Nullable<int> stock_quantity { get; set; }
+        public Nullable<int> supplier_id { get; set; }
     
         public virtual ICollection<Order_Items> Order_Items { get; set; }
         public virtual Stone_Types Stone_Types { get; set; }
+        public virtual Suppliers Suppliers { get; set; }
         public virtual Tones Tones { get; set; }
     }
 }

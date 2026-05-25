@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DimplomWork.Windows"
         mc:Ignorable="d"
                 Title="Auto" Height="600" Width="450"  Icon="\Images\Мир Камня.png"
-         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" AllowsTransparency="True">
+         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
     <Grid>
         <!-- Фоновый слой с изображением -->
         <Border CornerRadius="10" Margin="10" >

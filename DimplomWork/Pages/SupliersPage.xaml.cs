@@ -23,29 +23,29 @@ namespace DimplomWork.Pages
         public SupliersPage()
         {
             InitializeComponent();
-            //RefreshData();
+            RefreshData();
         }
 
-        //public void RefreshData(string searchText = null)
-        //{
-        //    //var allSuppliers = App.context.Supliers.ToList();
+        public void RefreshData(string searchText = null)
+        {
+            var allSuppliers = App.context.Suppliers.ToList();
 
-        //    if (!string.IsNullOrWhiteSpace(searchText))
-        //    {
-        //        allSuppliers = allSuppliers.Where(s =>
-        //            s.Name.ToLower().Contains(searchText.ToLower()) ||
-        //            (s.Phone != null && s.Phone.Contains(searchText)) ||
-        //            (s.Email != null && s.Email.ToLower().Contains(searchText.ToLower()))
-        //        ).ToList();
-        //    }
+            if (!string.IsNullOrWhiteSpace(searchText))
+            {
+                allSuppliers = allSuppliers.Where(s =>
+                    s.name.ToLower().Contains(searchText.ToLower()) ||
+                    (s.phone != null && s.phone.Contains(searchText)) ||
+                    (s.email != null && s.email.ToLower().Contains(searchText.ToLower()))
+                ).ToList();
+            }
 
-        //    SuppliersLv.ItemsSource = allSuppliers;
-        //}
+            SuppliersLv.ItemsSource = allSuppliers;
+        }
 
-        //private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    RefreshData(SearchTb.Text);
-        //}
+        private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            RefreshData(SearchTb.Text);
+        }
     }
 }
 

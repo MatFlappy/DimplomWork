@@ -35,7 +35,8 @@ namespace DimplomWork.Windows
 
                 if (user.Roles.Name == "Администратор")
                 {
-                    //new AdminWindow().Show();
+                    new FrameWindow().Show();
+                    
                 }
                 else
                 {

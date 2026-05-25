@@ -12,26 +12,23 @@ namespace DimplomWork.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Complete_Products
+    public partial class Suppliers
     {
-        public Complete_Products()
+        public Suppliers()
         {
-            this.Order_Items = new HashSet<Order_Items>();
+            this.Complete_Products = new HashSet<Complete_Products>();
+            this.Tiles = new HashSet<Tiles>();
         }
     
         public int id { get; set; }
-        public string Name { get; set; }
-        public decimal price { get; set; }
-        public string photo { get; set; }
-        public Nullable<int> stone_type_id { get; set; }
-        public Nullable<int> tone_id { get; set; }
-        public string description { get; set; }
-        public Nullable<int> stock_quantity { get; set; }
-        public Nullable<int> supplier_id { get; set; }
+        public string name { get; set; }
+        public string phone { get; set; }
+        public string email { get; set; }
+        public string contact_person { get; set; }
+        public string address { get; set; }
+        public string inn { get; set; }
     
-        public virtual Stone_Types Stone_Types { get; set; }
-        public virtual Suppliers Suppliers { get; set; }
-        public virtual Tones Tones { get; set; }
-        public virtual ICollection<Order_Items> Order_Items { get; set; }
+        public virtual ICollection<Complete_Products> Complete_Products { get; set; }
+        public virtual ICollection<Tiles> Tiles { get; set; }
     }
 }
